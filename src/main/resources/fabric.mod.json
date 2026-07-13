@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "azazels-alchemy-table",
+	"version": "${version}",
+	"name": "Azazel's Alchemy Table",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/azazels-alchemy-table/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"ru.azazel.alchemytable.AzazelSAlchemyTable"
+		],
+		"client": [
+			"ru.azazel.alchemytable.client.AzazelSAlchemyTableClient"
+		]
+	},
+	"mixins": [
+		"azazels-alchemy-table.mixins.json",
+		{
+			"config": "azazels-alchemy-table.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
