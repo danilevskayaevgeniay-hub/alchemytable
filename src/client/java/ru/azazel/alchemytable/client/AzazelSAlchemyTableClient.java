@@ -9,7 +9,8 @@ public class AzazelSAlchemyTableClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		BlockRenderLayerMap.INSTANCE.putBlock(
-			ModBlocks.
-		)
+			ModBlocks.ALCHEMY_TABLE,
+			RenderLayer.getCutout()
+		);
 	}
 }
