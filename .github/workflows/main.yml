@@ -2,36 +2,45 @@ name: Alchemy Table
 
 on:
   workflow_dispatch:
+
   push:
-    branches: [ "main", "master" ]
+    branches:
+      - main
+
+permissions:
+  contents: read
 
 jobs:
   build:
+    name: Build mod
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
 
     steps:
       - name: Checkout project
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Java 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: '21'
+          java-version: "21"
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.14'
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Allow Gradle Wrapper to run
+        run: chmod +x gradlew
 
       - name: Build mod
-        run: gradle build --stacktrace
+        run: ./gradlew build --stacktrace
 
       - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
-          name: regeneration-crystal-mod-jar
-          path: build/libs/*.jar
+          name: azazels-alchemy-table-1.21.1
+          path: |
+            build/libs/*.jar
+            !build/libs/*-sources.jar
+            !build/libs/*-dev.jar
           if-no-files-found: error
+
