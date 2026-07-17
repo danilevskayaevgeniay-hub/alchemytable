@@ -20,7 +20,7 @@ public class ModBlocks {
             new Block(
                     AbstractBlock.Settings.create()
                             .strength(2.5f, 6.0f)
-                            .sounds(BlockSoundGroup.STONE)
+                            .sounds(BlockSoundGroup.WOOD)
                             .nonOpaque()
             )
     );
