@@ -2,9 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
-    "GBG",
-    "LFL",
-    "QQQ"
+    "GGG",
+    "QQQ",
+    "LBL"
   ],
   "key": {
     "G": {
@@ -16,11 +16,9 @@
     "L": {
       "item": "minecraft:stripped_oak_log"
     },
-    "F": {
-      "item": "minecraft:blaze_rod"
-    },
+
     "Q": {
-      "item": "minecraft:quartz_block"
+      "item": "minecraft:stone"
     }
   },
   "result": {
