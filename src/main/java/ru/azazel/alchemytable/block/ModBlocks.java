@@ -1,53 +1,63 @@
 package ru.azazel.alchemytable.block;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockSoundGroup;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
-import ru.azazel.alchemytable.AzazelsAlchemyTableMod;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import ru.azazel.alchemytable.AzazelSAlchemyTable;
 
 public class ModBlocks {
 
-    // Пока это декоративный блок без собственного интерфейса.
+    // Создаём алхимический стол и задаём его характеристики.
     public static final Block ALCHEMY_TABLE = registerBlock(
             "alchemy_table",
             new Block(
-                    AbstractBlock.Settings.create()
+                    BlockBehaviour.Properties.of()
                             .strength(2.5f, 6.0f)
-                            .sounds(BlockSoundGroup.WOOD)
-                            .nonOpaque()
+                            .sound(SoundType.WOOD)
+                            .noOcclusion()
             )
     );
 
     private static Block registerBlock(String name, Block block) {
-        Identifier id = Identifier.of(AzazelsAlchemyTableMod.MOD_ID, name);
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(
+                AzazelSAlchemyTable.MOD_ID,
+                name
+        );
 
-        // Регистрируем объект как блок, который можно поставить в мир.
-        Block registeredBlock = Registry.register(Registries.BLOCK, id, block);
-
-        // Регистрируем его предметную версию для инвентаря и руки игрока.
-        Registry.register(
-                Registries.ITEM,
+        // Регистрируем блок, который можно поставить в мир.
+        Block registeredBlock = Registry.register(
+                BuiltInRegistries.BLOCK,
                 id,
-                new BlockItem(registeredBlock, new Item.Settings())
+                block
+        );
+
+        // Регистрируем предметную версию блока для инвентаря.
+        Registry.register(
+                BuiltInRegistries.ITEM,
+                id,
+                new BlockItem(
+                        registeredBlock,
+                        new Item.Properties()
+                )
         );
 
         return registeredBlock;
     }
 
     public static void registerModBlocks() {
-        // Добавляем стол во вкладку функциональных блоков творческого режима.
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL)
-                .register(entries -> entries.add(ALCHEMY_TABLE));
+        // Добавляем стол во вкладку функциональных блоков.
+        ItemGroupEvents.modifyEntriesEvent(
+                CreativeModeTabs.FUNCTIONAL_BLOCKS
+        ).register(entries -> entries.accept(ALCHEMY_TABLE));
     }
 
     private ModBlocks() {
-        // Служебный класс не должен создаваться как обычный объект.
     }
 }
