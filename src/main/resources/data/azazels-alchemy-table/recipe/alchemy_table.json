@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GBG",
+    "LFL",
+    "QQQ"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass_bottle"
+    },
+    "B": {
+      "item": "minecraft:brewing_stand"
+    },
+    "L": {
+      "item": "minecraft:stripped_oak_log"
+    },
+    "F": {
+      "item": "minecraft:blaze_rod"
+    },
+    "Q": {
+      "item": "minecraft:quartz_block"
+    }
+  },
+  "result": {
+    "id": "azazels-alchemy-table:alchemy_table",
+    "count": 1
+  },
+  "show_notification": true
+}
