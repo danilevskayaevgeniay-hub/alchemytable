@@ -17,7 +17,7 @@ public class ModBlocks {
     // Создаём алхимический стол и задаём его характеристики.
     public static final Block ALCHEMY_TABLE = registerBlock(
             "alchemy_table",
-            new Block(
+            new AlchemyTableBlock(
                     BlockBehaviour.Properties.of()
                             .strength(2.5f, 6.0f)
                             .sound(SoundType.WOOD)
