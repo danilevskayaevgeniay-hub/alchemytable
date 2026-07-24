@@ -5,8 +5,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import ;
-import  ;
+import ru.azazel.alchemytable.AzazelSAlchemyTable;
+import ru.azazel.alchemytable.block.ModBlocks;
 
 public class ModBlockEntities {
 
