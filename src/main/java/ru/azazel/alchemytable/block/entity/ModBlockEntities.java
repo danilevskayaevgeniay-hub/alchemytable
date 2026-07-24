@@ -20,7 +20,8 @@ public class ModBlockEntities {
                     ),
 
                     FabricBlockEntityTypeBuilder.create(
-                           
+                        AlchemyTableBlockEntity::new,
+                        ModBlocks.
                     ).build()
             );
 
