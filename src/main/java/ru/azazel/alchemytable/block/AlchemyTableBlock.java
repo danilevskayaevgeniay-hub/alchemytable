@@ -6,6 +6,8 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import ru.azazel.alchemytable.block.entity.AlchemyTableBlockEntity;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
@@ -42,6 +44,17 @@ public class AlchemyTableBlock extends Block implements EntityBlock{
         );
     }
 
+    @Override
+    public BlockEntity newBlockEntity(
+        BlockPos pos,
+        BlockState state
+    ) {
+    return new AlchemyTableBlockEntity(
+            pos,
+            state
+        );
+    }
+    
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState()
