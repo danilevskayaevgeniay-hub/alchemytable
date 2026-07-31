@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.azazel.alchemytable.block.ModBlocks;
 import ru.azazel.alchemytable.block.entity.ModBlockEntities;
+import ru.azazel.alchemytable.menu.ModMenuTypes;
 
 public class AzazelSAlchemyTable implements ModInitializer {
 	public static final String MOD_ID = "azazels-alchemy-table";
@@ -24,6 +25,7 @@ public class AzazelSAlchemyTable implements ModInitializer {
 		// Proceed with mild caution.
 		ModBlocks.registerModBlocks();
 		ModBlockEntities.registerModBlockEntities();
+		ModMenuTypes.registerModMenuTypes();
 
 		LOGGER.info("Hello Fabric world!");
 	}
