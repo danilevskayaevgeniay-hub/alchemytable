@@ -16,6 +16,10 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.whis.BlockHitResult;
 
 public class AlchemyTableBlock extends Block implements EntityBlock{
 
@@ -53,6 +57,71 @@ public class AlchemyTableBlock extends Block implements EntityBlock{
             pos,
             state
         );
+    }
+    // -----------------------------------------
+    // ОТКРЫТИЕ МЕНЮ ПО ПКМ
+    // -----------------------------------------
+
+    /**
+     * Этот метод вызывается,
+     * когда игрок нажимает по столу
+     * правой кнопкой мыши без использования
+     * специального действия предмета.
+     */
+    @Override
+    protected InteractionResult useWithoutItem(
+            BlockState state,
+            Level level,
+            BlockPos pos,
+            Player player,
+            BlockHitResult hit
+    ) {
+
+        /**
+         * Меню открываем только на серверной стороне.
+         *
+         * Сервер хранит настоящие предметы
+         * и управляет содержимым контейнера.
+         */
+        if (!level.isClientSide()) {
+
+            // Получаем Block Entity,
+            // находящуюся в координатах стола.
+            BlockEntity blockEntity =
+                    level.getBlockEntity(
+                            pos
+                    );
+
+
+            /**
+             * Проверяем, что это действительно
+             * наша AlchemyTableBlockEntity.
+             */
+            if (
+                    blockEntity
+                            instanceof AlchemyTableBlockEntity
+                            alchemyTable
+            ) {
+
+                /**
+                 * Передаём Block Entity как MenuProvider.
+                 *
+                 * Minecraft вызовет:
+                 * getDisplayName()
+                 * createMenu()
+                 */
+                player.openMenu(
+                        alchemyTable
+                );
+            }
+        }
+
+
+        /**
+         * SUCCESS сообщает Minecraft,
+         * что взаимодействие обработано.
+         */
+        return InteractionResult.SUCCESS;
     }
     
     @Override
