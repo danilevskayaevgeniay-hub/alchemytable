@@ -19,7 +19,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.whis.BlockHitResult;
+import net.minecraft.world.phys.BlockHitResult;
 
 public class AlchemyTableBlock extends Block implements EntityBlock{
 
