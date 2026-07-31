@@ -11,10 +11,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import ru.azazel.alchemytable.menu.
+import ru.azazel.alchemytable.menu.AlchemyTableMenu;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 
 
-public class AlchemyTableBlockEntity extends BlockEntity implements Container {
+public class AlchemyTableBlockEntity extends BlockEntity implements Container, MenuProvider {
     public static final int POTIONSLOT1 = 0;
     public static final int POTIONSLOT2 = 1;
     public static final int POTIONSLOT3 = 2;
@@ -34,6 +35,26 @@ public class AlchemyTableBlockEntity extends BlockEntity implements Container {
                 ModBlockEntities.ALCHEMY_TABLE_BLOCK_ENTITY,
                 pos,
                 state
+        );
+    }
+    @Override
+    public Component getDisplayName() {
+
+        return Component.translatable(
+                "block.azazels-alchemy-table.alchemy_table"
+        );
+    }
+    @Override
+    public AbstractContainerMenu createMenu(
+            int containerId,
+            Inventory playerInventory,
+            Player player
+    ) {
+
+        return new AlchemyTableMenu(
+                containerId,
+                playerInventory,
+                this
         );
     }
 
