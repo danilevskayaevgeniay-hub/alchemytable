@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import ru.azazel.alchemytable.menu.
 
 
 public class AlchemyTableBlockEntity extends BlockEntity implements Container {
