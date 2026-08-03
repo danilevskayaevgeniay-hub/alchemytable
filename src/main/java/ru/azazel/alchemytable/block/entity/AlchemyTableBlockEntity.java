@@ -44,7 +44,7 @@ public class AlchemyTableBlockEntity extends BlockEntity implements Container, M
     public Component getDisplayName() {
 
         return Component.translatable(
-                "block.azazels-alchemy-table.alchemy_table"
+                "container.azazels-alchemy-table.alchemy_table"
         );
     }
     @Override
