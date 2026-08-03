@@ -17,5 +17,9 @@ public class AzazelSAlchemyTableClient implements ClientModInitializer {
                 ModBlocks.ALCHEMY_TABLE,
                 RenderType.cutout()
         );
+        MenuScreens.register(
+            ModMenuTypes.ALCHEMY_TABLE_MENU,
+            AlchemyTableScreen::new
+        );
     }
 }
