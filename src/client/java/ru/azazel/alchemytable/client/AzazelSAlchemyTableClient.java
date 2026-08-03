@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.client.renderer.RenderType;
 import ru.azazel.alchemytable.block.ModBlocks;
 import net.minecraft.client.gui.screens.MenuScreens;
-import ru.azazel.alchemytable.client.screen.;
+import ru.azazel.alchemytable.client.screen.AlchemyTableScreen;
 
 public class AzazelSAlchemyTableClient implements ClientModInitializer {
 
