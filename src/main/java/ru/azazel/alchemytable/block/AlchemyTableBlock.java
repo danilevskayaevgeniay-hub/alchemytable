@@ -68,61 +68,7 @@ public class AlchemyTableBlock extends Block implements EntityBlock{
      * правой кнопкой мыши без использования
      * специального действия предмета.
      */
-    @Override
-    protected InteractionResult useWithoutItem(
-            BlockState state,
-            Level level,
-            BlockPos pos,
-            Player player,
-            BlockHitResult hit
-    ) {
-
-        /**
-         * Меню открываем только на серверной стороне.
-         *
-         * Сервер хранит настоящие предметы
-         * и управляет содержимым контейнера.
-         */
-        if (!level.isClientSide()) {
-
-            // Получаем Block Entity,
-            // находящуюся в координатах стола.
-            BlockEntity blockEntity =
-                    level.getBlockEntity(
-                            pos
-                    );
-
-
-            /**
-             * Проверяем, что это действительно
-             * наша AlchemyTableBlockEntity.
-             */
-            if (
-                    blockEntity
-                            instanceof AlchemyTableBlockEntity
-                            alchemyTable
-            ) {
-
-                /**
-                 * Передаём Block Entity как MenuProvider.
-                 *
-                 * Minecraft вызовет:
-                 * getDisplayName()
-                 * createMenu()
-                 */
-                player.openMenu(
-                        alchemyTable
-                );
-            }
-        }
-
-
-        /**
-         * SUCCESS сообщает Minecraft,
-         * что взаимодействие обработано.
-         */
-        return InteractionResult.SUCCESS;
-    }
+    
     
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
@@ -132,6 +78,130 @@ public class AlchemyTableBlock extends Block implements EntityBlock{
                         context.getHorizontalDirection().getOpposite()
                 );
     }
+        // -----------------------------------------
+    // ОБЩИЙ МЕТОД ОТКРЫТИЯ МЕНЮ
+    // -----------------------------------------
+
+    /**
+     * Открывает интерфейс конкретного
+     * алхимического стола.
+     */
+    private void openAlchemyTableMenu(
+            Level level,
+            BlockPos pos,
+            Player player
+    ) {
+
+        /**
+         * Настоящее меню открывает сервер.
+         *
+         * Клиент только получает команду
+         * показать соответствующий Screen.
+         */
+        if (!level.isClientSide()) {
+
+            BlockEntity blockEntity =
+                    level.getBlockEntity(
+                            pos
+                    );
+
+
+            /**
+             * Проверяем, что в этой позиции
+             * находится именно Block Entity
+             * алхимического стола.
+             */
+            if (
+                    blockEntity
+                            instanceof AlchemyTableBlockEntity
+                            alchemyTable
+            ) {
+
+                player.openMenu(
+                        alchemyTable
+                );
+            }
+        }
+    }
+
+
+    // -----------------------------------------
+    // ПКМ ПУСТОЙ РУКОЙ
+    // -----------------------------------------
+
+    /**
+     * Вызывается, когда в руке нет предмета.
+     */
+    @Override
+    protected InteractionResult useWithoutItem(
+            BlockState state,
+            Level level,
+            BlockPos pos,
+            Player player,
+            BlockHitResult hit
+    ) {
+
+        openAlchemyTableMenu(
+                level,
+                pos,
+                player
+        );
+
+
+        /**
+         * Сообщаем Minecraft,
+         * что действие обработано успешно.
+         */
+        return InteractionResult.sidedSuccess(
+                level.isClientSide()
+        );
+    }
+
+
+    // -----------------------------------------
+    // ПКМ С ПРЕДМЕТОМ В РУКЕ
+    // -----------------------------------------
+
+    /**
+     * Вызывается, когда игрок держит предмет.
+     *
+     * Благодаря этому интерфейс откроется,
+     * даже когда в руке находится зелье.
+     */
+    @Override
+    protected ItemInteractionResult useItemOn(
+            ItemStack stack,
+            BlockState state,
+            Level level,
+            BlockPos pos,
+            Player player,
+            InteractionHand hand,
+            BlockHitResult hit
+    ) {
+
+        /**
+         * Обрабатываем только основную руку.
+         *
+         * Это защищает от двойного вызова
+         * для двух рук игрока.
+         */
+        if (hand == InteractionHand.MAIN_HAND) {
+
+            openAlchemyTableMenu(
+                    level,
+                    pos,
+                    player
+            );
+        }
+
+
+        return ItemInteractionResult.sidedSuccess(
+                level.isClientSide()
+        );
+    }
+
+
+
 
     @Override
     protected void createBlockStateDefinition(
