@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.RenderType;
 import ru.azazel.alchemytable.block.ModBlocks;
 import net.minecraft.client.gui.screens.MenuScreens;
 import ru.azazel.alchemytable.client.screen.AlchemyTableScreen;
+import ru.azazel.alchemytable.menu.ModMenuTypes;
 
 public class AzazelSAlchemyTableClient implements ClientModInitializer {
 
