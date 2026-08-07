@@ -208,25 +208,43 @@ public class AlchemyTableBlockEntity extends BlockEntity implements Container, M
     private void tryCraftPotion() {
 
     // Получаем предметы из четырёх слотов.
-    ItemStack potion1 = POTIONSLOT1;
-            this.items.get(
-                    
-            );
+    // ИСПРАВЛЕНО: номер слота должен передаваться внутрь get().
+    ItemStack potion1 = this.items.get(POTIONSLOT1);
 
-    ItemStack potion2 = POTIONSLOT2;
-            this.items.get(
-                    
-            );
+    // ИСПРАВЛЕНО: номер слота должен передаваться внутрь get().
+    ItemStack potion2 = this.items.get(POTIONSLOT2);
 
-    ItemStack bottle = POTIONSLOT3;
-            this.items.get(
-                   
-            );
+    // ИСПРАВЛЕНО: номер слота должен передаваться внутрь get().
+    ItemStack bottle = this.items.get(POTIONSLOT3);
 
-    ItemStack fuel = POTIONSLOT4;
-            this.items.get(
-                    
-            );
+    // ИСПРАВЛЕНО: номер слота должен передаваться внутрь get().
+    ItemStack fuel = this.items.get(POTIONSLOT4);
+
+
+    // Проверяем первое зелье.
+    if (!potion1.is(Items.POTION)) {
+        return;
+    }
+
+
+    // Проверяем второе зелье.
+    if (!potion2.is(Items.POTION)) {
+        return;
+    }
+
+
+    // В третьем слоте должна быть
+    // ИСПРАВЛЕНО: удалён лишний символ /, который ломал синтаксис.
+    if (!bottle.is(Items.GLASS_BOTTLE)) {
+        return;
+    }
+
+
+    // В четвёртом слоте должен быть
+    if (!fuel.is(Items.BLAZE_POWDER)) {
+        return;
+    }
+
 
 
     // Проверяем первое зелье.
