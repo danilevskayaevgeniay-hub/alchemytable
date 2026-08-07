@@ -208,48 +208,48 @@ public class AlchemyTableBlockEntity extends BlockEntity implements Container, M
     private void tryCraftPotion() {
 
     // Получаем предметы из четырёх слотов.
-    ItemStack potion1 = POTIONSLOT0
+    ItemStack potion1 = POTIONSLOT1
             this.items.get(
                     
             );
 
-    ItemStack potion2 = POTIONSLOT1
+    ItemStack potion2 = POTIONSLOT2
             this.items.get(
                     
             );
 
-    ItemStack bottle = POTIONSLOT2
+    ItemStack bottle = POTIONSLOT3
             this.items.get(
                    
             );
 
-    ItemStack fuel =
+    ItemStack fuel = POTIONSLOT4
             this.items.get(
                     
             );
 
 
     // Проверяем первое зелье.
-    if (!potion1.is(Items.)) {
+    if (!potion1.is(Items.POTION)) {
         return;
     }
 
 
     // Проверяем второе зелье.
-    if (!potion2.is(Items.)) {
+    if (!potion2.is(Items.POTION)) {
         return;
     }
 
 
     // В третьем слоте должна быть
     /
-    if (!bottle.is(Items.)) {
+    if (!bottle.is(Items.GLASS_BOTTLE)) {
         return;
     }
 
 
     // В четвёртом слоте должен быть
-    if (!fuel.is(Items.)) {
+    if (!fuel.is(Items.BLAZE_POWDER)) {
         return;
     }
 
